@@ -2,6 +2,7 @@
 Bacterial genome analysis using short and long reads.
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥8.4.7-brightgreen.svg)](https://snakemake.readthedocs.io/en/stable/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11199081.svg)](https://doi.org/10.5281/zenodo.11199081)
 
 ```bash
 ________             _______________             ______       
@@ -385,7 +386,7 @@ The workflow output reflects the steps described in the [description](#descripti
 This work was supported by the [Austrian Science Fund (FWF)](https://www.fwf.ac.at/en/) [Project I6030-B].
 
 ## Citation
-In preparation.
+Antonielli, L., Nagel, M., Sanchez Mejia, A., Koch, H., Trognitz, F., & Großkinsky, D. (2024). BacFluxL+: Bacterial genome analysis using short and long reads. Zenodo. https://doi.org/10.5281/zenodo.11199081
 
 ## References
 1. Alcock, B. P., Huynh, W., Chalil, R., Smith, K. W., Raphenya, A. R., Wlodarski, M. A., Edalatmand, A., Petkau, A., Syed, S. A., Tsang, K. K., Baker, S. J. C., Dave, M., McCarthy, M. C., Mukiri, K. M., Nasir, J. A., Golbon, B., Imtiaz, H., Jiang, X., Kaur, K., … McArthur, A. G. (2023). CARD 2023: Expanded curation, support for machine learning, and resistome prediction at the Comprehensive Antibiotic Resistance Database. Nucleic Acids Research, 51(D1), D690–D699. https://doi.org/10.1093/nar/gkac920
