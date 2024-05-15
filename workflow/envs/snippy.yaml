@@ -1,4 +1,4 @@
-ame: snippy
+name: snippy
 channels:
   - conda-forge
   - bioconda
