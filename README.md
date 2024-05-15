@@ -92,7 +92,7 @@ This guide gets you started with `BacFluxL+`. Here's a quick guide:
 Now you're all set to run `BacFluxL+`! Refer to the [installation](#installation), [configuration](#configuration) and [running BacFluxL+](#running-bacfluxl+) sections for detailed instructions.
 
 ## Rationale
-The analysis of bacterial Whole Genome Sequencing (WGS) data is a process that requires the integration of multiple bioinformatics tools. `BacFluxL+` is a follow-up version of [`BacFlux`](https://github.com/iLivius/BacFlux) that takes this process a step further by leveraging the strengths of both Illumina short reads and Oxford Nanopore Technologies (ONT) long reads. The integration of short and long reads in BacFluxL+ can offer an improvement in terms of accuracy and completeness of the assembled genomes.
+The analysis of bacterial Whole Genome Sequencing (WGS) data is a process that requires the integration of multiple bioinformatics tools. `BacFluxL+` is a follow-up version of [`BacFlux`](https://github.com/iLivius/BacFlux) that takes this process a step further by leveraging the strengths of both Illumina short reads and Oxford Nanopore Technologies (ONT) long reads. The integration of short and long reads in `BacFluxL+` can offer an improvement in terms of accuracy and completeness of the assembled genomes.
 
 `BacFluxL+` incorporates the best bioinformatics tools into a comprehensive and automated Snakemake workflow, allowing researchers to focus on interpreting the biological significance of their data, rather than on the technical aspects of data analysis.
 
