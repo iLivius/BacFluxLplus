@@ -49,7 +49,7 @@ This guide gets you started with `BacFluxL+`. Here's a quick guide:
 - Download the latest release:
     ```bash
     #git command
-    git clone https://github.com/iLivius/BacFluxL+.git
+    git clone https://github.com/iLivius/BacFluxLplus.git
     ```
 
 - Configure the `config.yaml`:
