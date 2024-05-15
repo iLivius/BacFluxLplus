@@ -164,7 +164,7 @@ Here's a breakdown of the `BacFluxL+` workflow:
     Head over to the Releases section of the repository. Download the latest archive file (typically in .zip or .tar.gz format). This archive contains the `BacFluxL+` Snakefile script, the config.yaml configuration file, and an envs environment directory. Extract the downloaded archive into your desired location. This will create a directory structure with the necessary files and directories. Alternatively, download via command line as:
     ```bash
     #git command
-    git clone https://github.com/iLivius/BacFluxL+.git
+    git clone https://github.com/iLivius/BacFluxLplus.git
     ```
 
 2. **Install Snakemake:**
