@@ -23,7 +23,7 @@ May 2024
 - Hanna Koch
 - Friederike Trognitz
 
-[IPK Leibniz Institute, Cryo and Stress Biology](https://www.ipk-gatersleben.de/forschung/genbank/cryo-und-stressbiologie)
+[IPK Leibniz Institute of Plant Genetics and Crop Plant Research, Cryo and Stress Biology](https://www.ipk-gatersleben.de/forschung/genbank/cryo-und-stressbiologie)
 - Manuela Nagel
 - Alexa Sanchez Mejia
 
