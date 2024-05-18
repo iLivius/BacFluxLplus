@@ -38,7 +38,7 @@ The pipeline accepts paired-end reads along with long reads as input. These are 
 - [Description](#description)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Running BacFlux](#running-bacflux)
+- [Running BacFluxL+](#running-bacfluxl+)
 - [Output](#output)
 - [Acknowledgements](#acknowledgements)
 - [Citation](#citation)
