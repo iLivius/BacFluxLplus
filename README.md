@@ -162,7 +162,7 @@ Here's a breakdown of the `BacFluxL+` workflow:
 
 1. **Download BacFluxL+:**
 
-    Head over to the Releases section of the repository. Download the latest archive file (typically in .zip or .tar.gz format). This archive contains the `BacFluxL+` Snakefile script, the config.yaml configuration file, and an envs environment directory. Extract the downloaded archive into your desired location. This will create a directory structure with the necessary files and directories. Alternatively, download via command line as:
+    Head over to the Releases section of the repository. Download the latest archive file (typically in .zip or .tar.gz format). This archive contains the `BacFluxL+` Snakefile script, the `config.yaml` configuration file, and an `envs` environment directory. Extract the downloaded archive into your desired location. This will create a directory structure with the necessary files and directories. Alternatively, download via command line as:
     ```bash
     #git command
     git clone https://github.com/iLivius/BacFluxLplus.git
@@ -311,7 +311,7 @@ Before running `BacFluxL+`, you must edit the `config.yaml` file with a text edi
     
     1. `medaka_model`: This refers to the version of the model used for basecalling the long reads. If left blank, the default used by [Medaka](https://github.com/nanoporetech/medaka) v1.11.3, i.e. `r1041_e82_400bps_sup_v4.3.0`, will be adopted.
 
-    2. `genus`: This parameter allows you to filter the contigs that will eventually be included in the final assembly, based on their taxonomic affiliation at the genus level. If this field is left blank, `BacFluxL+` will automatically retain contigs matching the most abundant taxon, as determined by BLAST analysis. This approach is often effective but has limitations. For instance, it might not provide the best resolution at the species level due to the reliance on the sum of the best scores of BLAST hits. Additionally, this method can be misleading if the contaminating organism belongs to the same genus as your target organism, or if you have co-cultured closely related species or strains. If this parameter causes more trouble than benefit in your specific case, simply remove the `genus` option from the `config_file.yaml`. 
+    2. `genus`: This parameter allows you to filter the contigs that will eventually be included in the final assembly, based on their taxonomic affiliation at the genus level. If this field is left blank, `BacFluxL+` will automatically retain contigs matching the most abundant taxon, as determined by BLAST analysis. This approach is often effective but has limitations. For instance, it might not provide the best resolution at the species level due to the reliance on the sum of the best scores of BLAST hits. Additionally, this method can be misleading if the contaminating organism belongs to the same genus as your target organism, or if you have co-cultured closely related species or strains. If this parameter causes more trouble than benefit in your specific case, simply remove the `genus` option from the `config.yaml` file. 
 
         - **Using** the `genus` parameter: 
   
