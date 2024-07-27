@@ -361,7 +361,7 @@ The workflow output reflects the steps described in the [description](#descripti
 - `09.taxonomy`: Taxonomic placement of short-read assembled selected contigs and long-read assembled curated contigs, performed by [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) (v2.3.2).
 
 - `10.annotation`: Based on long-read assembled, reoriented, error corrected contigs. Contains the following sub-directories:
-    - **prokka**: Legacy annotation performed by [Prokka](https://github.com/tseemann/prokka) (v1.14.5).
+    - **prokka**: Legacy annotation performed by [Prokka](https://github.com/tseemann/prokka) (v1.14.6).
     - **bakta**: Accurate annotation outputted by [Bakta](https://github.com/oschwengers/bakta) (v1.9.3).
     - **eggnog**: Functional annotation produced by [EggNOG](https://github.com/eggnogdb) mapper (v2.1.12).
     - **antismash**: Secondary metabolites inferred by [antiSMASH](https://github.com/antismash/antismash) (v7.1.0).
