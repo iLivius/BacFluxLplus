@@ -140,7 +140,7 @@ Here's a breakdown of the `BacFluxL+` workflow:
     * Accurate taxonomic placement is performed with [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) using a curated reference [database](https://gtdb.ecogenomic.org/).
 
 11. **Annotation:**
-    * Contigs are annotated using [Prokka](https://github.com/vdejager/prokka) and [Bakta](https://github.com/oschwengers/bakta) for functional prediction.
+    * Contigs are annotated using [Prokka](https://github.com/tseemann/prokka) and [Bakta](https://github.com/oschwengers/bakta) for functional prediction.
     * Further functional annotation is provided with [EggNOG](https://github.com/eggnogdb).
     * Secondary metabolites are inferred with [antiSMASH](https://github.com/antismash/antismash).
 
@@ -361,7 +361,7 @@ The workflow output reflects the steps described in the [description](#descripti
 - `09.taxonomy`: Taxonomic placement of short-read assembled selected contigs and long-read assembled curated contigs, performed by [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) (v2.3.2).
 
 - `10.annotation`: Based on long-read assembled, reoriented, error corrected contigs. Contains the following sub-directories:
-    - **prokka**: Legacy annotation performed by [Prokka](https://github.com/vdejager/prokka) (v1.14.6).
+    - **prokka**: Legacy annotation performed by [Prokka](https://github.com/tseemann/prokka) (v1.14.5).
     - **bakta**: Accurate annotation outputted by [Bakta](https://github.com/oschwengers/bakta) (v1.9.3).
     - **eggnog**: Functional annotation produced by [EggNOG](https://github.com/eggnogdb) mapper (v2.1.12).
     - **antismash**: Secondary metabolites inferred by [antiSMASH](https://github.com/antismash/antismash) (v7.1.0).
@@ -380,7 +380,7 @@ The workflow output reflects the steps described in the [description](#descripti
     1. [fastp](https://github.com/OpenGene/fastp) (v0.23.4)
     2. [QualiMap](http://qualimap.conesalab.org/) (v2.3)
     3. [Quast](https://github.com/ablab/quast) (v5.2.0)
-    4. [Prokka](https://github.com/vdejager/prokka) (v1.14.6)
+    4. [Prokka](https://github.com/tseemann/prokka) (v1.14.5)
     5. [Bakta](https://github.com/oschwengers/bakta) (v1.9.3)
 
 ## Acknowledgements
