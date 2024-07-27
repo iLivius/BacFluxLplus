@@ -380,7 +380,7 @@ The workflow output reflects the steps described in the [description](#descripti
     1. [fastp](https://github.com/OpenGene/fastp) (v0.23.4)
     2. [QualiMap](http://qualimap.conesalab.org/) (v2.3)
     3. [Quast](https://github.com/ablab/quast) (v5.2.0)
-    4. [Prokka](https://github.com/tseemann/prokka) (v1.14.5)
+    4. [Prokka](https://github.com/tseemann/prokka) (v1.14.6)
     5. [Bakta](https://github.com/oschwengers/bakta) (v1.9.3)
 
 ## Acknowledgements
