@@ -11,9 +11,9 @@ __  __  |  __ `/  ___/_  /_   __  /_  / / /_  |/_/_  / ___/ /_
 _  /_/ // /_/ // /__ _  __/   _  / / /_/ /__>  < _  /__/_  __/
 /_____/ \__,_/ \___/ /_/      /_/  \__,_/ /_/|_| /_____//_/   
                                                                                                             
-BacFluxL+ v1.1.1
+BacFluxL+ v1.1.2
 
-May 2024
+August 2024
 ```
 
 ## Authors and Contributors
@@ -59,16 +59,16 @@ This guide gets you started with `BacFluxL+`. Here's a quick guide:
         * ONT reads: long sequencing counterpart, *e.g., strain-1_ont.fg.qz.*
 
     - Provide the desired location for the analysis outputs and the path to the following databases:
-        * blast_db: path to the [NCBI nt](https://ftp.ncbi.nlm.nih.gov/blast/db/) database directory
+        * blast_db: path to the [NCBI core nt](https://ftp.ncbi.nlm.nih.gov/blast/db/) database directory
         * eggnog_db: path to the [eggNOG](https://github.com/eggnogdb/eggnog-mapper/wiki/eggNOG-mapper-v2.1.5-to-v2.1.12#user-content-Installation) diamond database directory
-        * gtdbtk_db: path to the [GTDB](https://ecogenomics.github.io/GTDBTk/installing/index.html) database directory
+        * gtdbtk_db: path to the [GTDB](https://ecogenomics.github.io/GTDBTk/installing/index.html) R220 database directory
         * bakta_db: path to the [Bakta](https://github.com/oschwengers/bakta?tab=readme-ov-file#database) database directory
         * platon_db: path to the [Platon](https://github.com/oschwengers/platon?tab=readme-ov-file#database) database directory
 
 - Install [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (if not installed already) and activate the environment:
   ```bash
   #optional, if not installed already
-  conda create -c conda-forge -c bioconda -n snakemake snakemake
+  mamba create -c conda-forge -c bioconda -n snakemake snakemake
   #activate Snakemake environment
   conda activate snakemake
   ```
@@ -170,10 +170,10 @@ Here's a breakdown of the `BacFluxL+` workflow:
 
 2. **Install Snakemake:**
 
-    `BacFluxL+` relies on [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) to manage the workflow execution. Find the official and complete set of instructions [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html). Alternatively, to install Snakemake as a Conda environment:
+    `BacFluxL+` relies on [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html) to manage the workflow execution. Find the official and complete set of instructions [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html). To install Snakemake as a Conda environment:
     ```bash
-    #install Snakemake in a new Conda environment (alternatively, use mamba)
-    conda create -c conda-forge -c bioconda -n snakemake snakemake
+    #install Snakemake in a new Conda environment
+    mamba create -c conda-forge -c bioconda -n snakemake snakemake
     ```
 
 3. **Databases:**
@@ -182,10 +182,10 @@ Here's a breakdown of the `BacFluxL+` workflow:
 
     Here are the required databases and instructions for obtaining them.
 
-    * `NCBI nt` database, adapted from [here](https://gist.github.com/ppflrs/336e49f8ae3843dc06cc3925940f3024):
+    * `NCBI core nt` database, adapted from [here](https://gist.github.com/ppflrs/336e49f8ae3843dc06cc3925940f3024):
         ```bash
-        #create a list of all nt links in the directory designated to host the database (recommended)
-        rsync --list-only rsync://ftp.ncbi.nlm.nih.gov/blast/db/nt.*.gz | grep '.tar.gz' | awk '{print "ftp.ncbi.nlm.nih.gov/blast/db/" $NF}' > nt_links.list
+        #create a list of all core nt links in the directory designated to host the database (recommended)
+        rsync --list-only rsync://ftp.ncbi.nlm.nih.gov/blast/db/core_nt.*.gz | grep '.tar.gz' | awk '{print "ftp.ncbi.nlm.nih.gov/blast/db/" $NF}' > nt_links.list
         
         #alternatively, create a list of nt links for bacteria only 
         rsync --list-only rsync://ftp.ncbi.nlm.nih.gov/blast/db/nt_prok.*.gz | grep '.tar.gz' | awk '{print "ftp.ncbi.nlm.nih.gov/blast/db/" $NF}' > nt_prok_links.list
@@ -208,7 +208,7 @@ Here's a breakdown of the `BacFluxL+` workflow:
         wget -c 'ftp://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz'
         gunzip nucl_gb.accession2taxid.gz
         ```
-        *NOTE: the complete NCBI nt database and taxonomy-related files should take around 400 GB of hard drive space.*
+        *NOTE: the complete NCBI core nt database and taxonomy-related files should take around 223 GB of hard drive space.*
 
     * `eggNOG diamond` database:
         ```bash
@@ -229,12 +229,22 @@ Here's a breakdown of the `BacFluxL+` workflow:
 
     * `GTDB` database:
         ```bash
-        #move first inside the directory where you want to place the database, then download and decompress the file
-        wget -c https://data.gtdb.ecogenomic.org/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz
-        tar -xzvf gtdbtk_r214_data.tar.gz
-        rm gtdbtk_r214_data.tar.gz 
+        #move first inside the directory where you want to place the database, then download and decompress either the full package or the split package version
+
+        # full package
+        wget -c https://data.gtdb.ecogenomic.org/releases/release220/220.0/auxillary_files/gtdbtk_package/full_package/gtdbtk_r220_data.tar.gz
+        tar xzvf gtdbtk_r220_data.tar.gz
+        rm gtdbtk_r220_data.tar.gz
+
+        # split package (alternative)
+        base_url="https://data.gtdb.ecogenomic.org/releases/release220/220.0/auxillary_files/gtdbtk_package/split_package/gtdbtk_r220_data.tar.gz.part_"
+        suffixes=(aa ab ac ad ae af ag ah ai aj ak)
+        printf "%s\n" "${suffixes[@]}" | xargs -n 1 -P 11 -I {} wget "${base_url}{}"
+        cat gtdbtk_r220_data.tar.gz.part_* > gtdbtk_r220_data.tar.gz
+        tar xzvf gtdbtk_r220_data.tar.gz
+        rm gtdbtk_r220_data.tar.gz
         ```
-        *NOTE: the data needed to run GTDB-Tk will occupy around 85 GB of space.*
+        *NOTE: compressed archive size ~102 GB, decompressed archive size ~108 GB.*
 
     * `Bakta` database:
         ```bash
@@ -293,7 +303,7 @@ Before running `BacFluxL+`, you must edit the `config.yaml` file with a text edi
 
     - **eggnog_db**: Path to the diamond database for `eggNOG`.
 
-    - **gtdbtk_db**: Path to the R214 release of `GTDB`.
+    - **gtdbtk_db**: Path to the R220 release of `GTDB`.
 
     - **bakta_db**: Path to either the light or full (recommended) database of `Bakta`.
 
@@ -308,19 +318,15 @@ Before running `BacFluxL+`, you must edit the `config.yaml` file with a text edi
 
 - `parameters`
 
-    `BacFluxL+` offers two optional parameters: 
+    1. **Database selection**: `BacFluxL+` requires specifying the version of the `NCBI nt` database for `BLAST` operations. You can choose between the `core_nt` and `nt_prok` versions. By default, the `config.yaml` configuration file is set to use the `core_nt` database. For instructions on installing the `BLAST` database, refer to the [installation](#installation).
     
-    1. `medaka_model`: This refers to the version of the model used for basecalling the long reads. If left blank, the default used by [Medaka](https://github.com/nanoporetech/medaka) v1.11.3, i.e. `r1041_e82_400bps_sup_v4.3.0`, will be adopted.
+    2. **Medaka model**: This refers to the version of the `medaka_model` used for basecalling the long reads. If left blank, the default used by [Medaka](https://github.com/nanoporetech/medaka) v1.11.3 is `r1041_e82_400bps_sup_v4.3.0`.
 
-    2. `genus`: This parameter allows you to filter the contigs that will eventually be included in the final assembly, based on their taxonomic affiliation at the genus level. If this field is left blank, `BacFluxL+` will automatically retain contigs matching the most abundant taxon, as determined by BLAST analysis. This approach is often effective but has limitations. For instance, it might not provide the best resolution at the species level due to the reliance on the sum of the best scores of BLAST hits. Additionally, this method can be misleading if the contaminating organism belongs to the same genus as your target organism, or if you have co-cultured closely related species or strains. If this parameter causes more trouble than benefit in your specific case, simply remove the `genus` option from the `config.yaml` file. 
-
-        - **Using** the `genus` parameter: 
-  
-            If a contaminant is ascertained to be more abundant than your target organism, you can re-run the workflow after reviewing the assembly [output](#output). Specify the `genus` of the desired bacterial taxon you want to keep in during the re-run. 
+    3. **Genus filtering**: `BacFluxL+` includes an optional parameter to specify the bacterial `genus` of contigs you wish to retain in the final assembly. If left blank, `BacFluxL+` will automatically keep contigs associated with the most abundant taxon, based on relative composition determined through `BLAST` analysis. While this approach generally works well, it has limitations, such as reduced resolution at the species level due to reliance on the cumulative best scores of `BLAST` hits. Additionally, this method may be problematic if the contaminant organism belongs to the same genus as your target organism, or if you are working with co-cultured closely related species or strains. If the `genus` parameter introduces more issues than benefits, simply remove the `genus` option from the `config.yaml` file.
     
-        - **Disabling** the `genus` filtering:
-
-            If either the automatic inference of contaminant contigs or the manual selection of the desired taxon are still not working for you, simply delete the `genus` option from the `parameters`. In this case, only contigs tagged as "no-hit" after BLAST search will be filtered out.
+        - **Using** the `genus` parameter: if a contaminant is ascertained to be more abundant than your target organism, you can re-run the workflow after reviewing the assembly [output](#output). Specify the `genus` of the desired bacterial taxon you want to keep in during the re-run. 
+        
+        - **Disabling** the `genus` filtering: if either the automatic inference of contaminant contigs or the manual selection of the desired taxon are still not working for you, simply delete the `genus` option from the `parameters`. In this case, only contigs tagged as "no-hit" after `BLAST` search will be filtered out.
 
 ## Running BacFluxL+
 `BacFluxL+` can be executed as simply as a Snakefile. Please refer to the official [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/index.html) for more details.
@@ -340,29 +346,29 @@ The workflow output reflects the steps described in the [description](#descripti
 
 - `01.pre-processing`: QC and statistics of Illumina raw reads before and after quality filtering and trimming, by [fastp](https://github.com/OpenGene/fastp) (v0.23.4).
 
-- `02.Illumina_assembly`: Content produced by [SPAdes](https://github.com/ablab/spades) (v3.15.5). In addition to the raw contigs, you will also find filtered contigs (greater than 500bp and with at least 2x coverage) and decontaminated contigs chosen after a BLAST search (see parameters in the [configuration](#configuration) section above). The completeness of these selected contigs will be examined later. They will also be used for Antimicrobial Resistance (AMR) detection, as detailed in the following sections.
+- `02.Illumina_assembly`: Content produced by [SPAdes](https://github.com/ablab/spades) (v4.0.0). In addition to the raw contigs, you will also find filtered contigs (greater than 500bp and with at least 2x coverage) and decontaminated contigs chosen after a BLAST search (see parameters in the [configuration](#configuration) section above). The completeness of these selected contigs will be examined later. They will also be used for Antimicrobial Resistance (AMR) detection, as detailed in the following sections.
 
 - `03.post-processing`: Contains the following sub-directories:
     - **mapping_evaluation**: [QualiMap](http://qualimap.conesalab.org/) (v2.3) output based on short-read assembled filtered contigs.
     - **contaminants**: Short-read assembled contig selection based on [BLAST+](https://blast.ncbi.nlm.nih.gov/doc/blast-help/) (v2.15.0) search and [BlobTools](https://github.com/DRL/blobtools) (1.1.1) analysis. Check the `composition` text file for a quick overview of the relative composition of your assembly.
     - **assembly_evaluation**: [Quast](https://github.com/ablab/quast) (v5.2.0) output based on short-read assembled selected contigs.
-    - **completenness_evaluation**: [CheckM](https://github.com/Ecogenomics/CheckM) (1.2.2) output based on short-read assembled contigs and long-read assembled contigs, after decontamination, re-orientation, and error correction.
+    - **completenness_evaluation**: [CheckM](https://github.com/Ecogenomics/CheckM) (1.2.3) output based on short-read assembled contigs and long-read assembled contigs, after decontamination, re-orientation, and error correction.
 
-- `04.ONT_assembly`: Long-read assembly performed by [Flye](https://github.com/fenderglass/Flye) (v2.9.3) after sequence filtering and short-read correction with [Filtlong](https://github.com/rrwick/Filtlong) (v0.2.1).    
+- `04.ONT_assembly`: Long-read assembly performed by [Flye](https://github.com/fenderglass/Flye) (v2.9.4) after sequence filtering and short-read correction with [Filtlong](https://github.com/rrwick/Filtlong) (v0.2.1).    
 
 - `05.ONT_consensus`: Long-read assembled contigs are error corrected with long reads using [Medaka](https://github.com/nanoporetech/medaka) (v1.11.3).
 
-- `06.fix_start`: Replicons are reoriented by [dnaapler](https://github.com/gbouras13/dnaapler) (v0.7.0) as follows: bacterial chromosomes will start with the *dnaA* gene, plasmids with *repA* and phages with *terL*. 
+- `06.fix_start`: Replicons are reoriented by [dnaapler](https://github.com/gbouras13/dnaapler) (v0.8.0) as follows: bacterial chromosomes will start with the *dnaA* gene, plasmids with *repA* and phages with *terL*. 
 
 - `07.Illumina_correction`: Contains the reoriented long-read assembled contigs after curation with short reads using [Polypolish](https://github.com/rrwick/) (v0.6.0). 
 
 - `08.SNPs`: Identification of variants (SNPs and indels) are conducted by [Snippy](https://github.com/tseemann/snippy) (v4.6.0) between refined short-read assembled contigs and the following: a) Long-read assembly; b) Long-read assembly corrected with long reads; c) Reoriented replicons; d) Reoriented replicons corrected with short-reads.
 
-- `09.taxonomy`: Taxonomic placement of short-read assembled selected contigs and long-read assembled curated contigs, performed by [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) (v2.3.2).
+- `09.taxonomy`: Taxonomic placement of short-read assembled selected contigs and long-read assembled curated contigs, performed by [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) (v2.4.0).
 
 - `10.annotation`: Based on long-read assembled, reoriented, error corrected contigs. Contains the following sub-directories:
     - **prokka**: Legacy annotation performed by [Prokka](https://github.com/tseemann/prokka) (v1.14.6).
-    - **bakta**: Accurate annotation outputted by [Bakta](https://github.com/oschwengers/bakta) (v1.9.3).
+    - **bakta**: Accurate annotation outputted by [Bakta](https://github.com/oschwengers/bakta) (v1.9.4).
     - **eggnog**: Functional annotation produced by [EggNOG](https://github.com/eggnogdb) mapper (v2.1.12).
     - **antismash**: Secondary metabolites inferred by [antiSMASH](https://github.com/antismash/antismash) (v7.1.0).
 
@@ -372,16 +378,16 @@ The workflow output reflects the steps described in the [description](#descripti
 
 - `12.plasmids`: Curated long-read assembled contigs are screened for the presence of plasmid replicons with [Platon](https://github.com/oschwengers/platon) and results verified by BLAST search to avoid false positive. Contigs ascertained as plasmids are reported in the `verified plasmids` file.
 
-- `13.phages`: Short-read assembled filtered contigs are screened for the presence of viral sequences using [VirSorter2](https://github.com/jiarong/VirSorter2) (v2.2.4), followed by [CheckV](https://bitbucket.org/berkeleylab/checkv/src/master/) (v1.0.1) for refinement:
+- `13.phages`: Short-read assembled filtered contigs are screened for the presence of viral sequences using [VirSorter2](https://github.com/jiarong/VirSorter2) (v2.2.4), followed by [CheckV](https://bitbucket.org/berkeleylab/checkv/src/master/) (v1.0.3) for refinement:
     - **virsorter**: Following the instructions provided [here](https://www.protocols.io/view/viral-sequence-identification-sop-with-virsorter2-5qpvoyqebg4o/v3?step=3), viral groups (i.e. dsDNA phage, NCLDV, RNA, ssDNA, and lavidaviridae) are detected with a loose cutoff of 0.5 for maximal sensitivity. Original sequences of circular and (near) fully viral contigs are preserved and passed to the next tool.
     - **checkv**: This second step serves to quality control the results of the previous step to avoid the presence of non-viral sequences (false positive) and to trim potential host regions left at the ends of proviruses.
 
-- `14.report`: [MultiQC](https://github.com/MultiQC/MultiQC) (v1.17) is used to parse and aggregate the results of the following tools:
+- `14.report`: [MultiQC](https://github.com/MultiQC/MultiQC) (v1.23) is used to parse and aggregate the results of the following tools:
     1. [fastp](https://github.com/OpenGene/fastp) (v0.23.4)
     2. [QualiMap](http://qualimap.conesalab.org/) (v2.3)
     3. [Quast](https://github.com/ablab/quast) (v5.2.0)
     4. [Prokka](https://github.com/tseemann/prokka) (v1.14.6)
-    5. [Bakta](https://github.com/oschwengers/bakta) (v1.9.3)
+    5. [Bakta](https://github.com/oschwengers/bakta) (v1.9.4)
 
 ## Acknowledgements
 This work was supported by the [Austrian Science Fund (FWF)](https://www.fwf.ac.at/en/) [Project I6030-B].

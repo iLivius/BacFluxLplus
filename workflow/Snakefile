@@ -5,10 +5,10 @@ __  __  |  __ `/  ___/_  /_   __  /_  / / /_  |/_/_  / ___/ /_
 _  /_/ // /_/ // /__ _  __/   _  / / /_/ /__>  < _  /__/_  __/
 /_____/ \__,_/ \___/ /_/      /_/  \__,_/ /_/|_| /_____//_/   
                                                                                                             
-BacFluxL+ v1.1.1
+BacFluxL+ v1.1.2
 
 
-Livio Antonielli, May 2024
+Livio Antonielli, August 2024
 ''')
 
 # Modules:
@@ -363,7 +363,7 @@ rule blast_contigs:
     blast = "03.post-processing/contaminants/{sample}/blastout"
   params:
     dir = BLASTDB,
-    db = os.path.join(BLASTDB, "nt")
+    db = os.path.join(BLASTDB, config['parameters']['nt_version'])
   resources:
     cpus = CPUS
   conda:
@@ -824,7 +824,7 @@ rule taxonomic_assignment:
   shell:
     """
     GTDBTK_DATA_PATH={params.gtdbtk_db:q} \
-    gtdbtk classify_wf -x fasta --genome_dir {input.checkm_dir} --cpus {resources.cpus} --pplacer_cpus {resources.cpus_p} --mash_db {params.gtdbtk_db:q}/mash/gtdb-tk_r214.msh \
+    gtdbtk classify_wf -x fasta --genome_dir {input.checkm_dir} --cpus {resources.cpus} --pplacer_cpus {resources.cpus_p} --mash_db {params.gtdbtk_db:q}/mash/gtdb-tk_r220.msh \
     --out_dir {output.gtdbtk_dir} > {log} 2>&1
 
     rm -rf {input.checkm_dir}/contigs*.fasta
@@ -1054,7 +1054,7 @@ rule plasmid_search:
   params:
     platon_db = PLATONDB,
     dir = BLASTDB,
-    db = os.path.join(BLASTDB, "nt")
+    db = os.path.join(BLASTDB, config['parameters']['nt_version'])
   resources:
     cpus = CPUS
   conda:

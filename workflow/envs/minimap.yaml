@@ -6,27 +6,32 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
-  - bzip2=1.0.8=hd590300_5
-  - c-ares=1.27.0=hd590300_0
-  - ca-certificates=2024.2.2=hbcca054_0
-  - htslib=1.19.1=h81da01d_1
-  - k8=0.2.5=hdcf5f25_4
+  - _sysroot_linux-64_curr_repodata_hack=3=h69a702a_16
+  - bzip2=1.0.8=h4bc722e_7
+  - c-ares=1.32.3=h4bc722e_0
+  - ca-certificates=2024.7.4=hbcca054_0
+  - htslib=1.20=h5efdd21_2
+  - k8=1.2=h6618dc6_1
+  - kernel-headers_linux-64=3.10.0=h4a8ded7_16
   - keyutils=1.6.1=h166bdaf_0
-  - krb5=1.21.2=h659d440_0
-  - libcurl=8.5.0=hca28451_0
-  - libdeflate=1.18=h0b41bf4_0
+  - krb5=1.21.3=h659f571_0
+  - libcurl=8.8.0=hca28451_1
+  - libdeflate=1.20=hd590300_0
   - libedit=3.1.20191231=he28a2e2_2
   - libev=4.33=hd590300_2
-  - libgcc-ng=13.2.0=h807b86a_5
-  - libgomp=13.2.0=h807b86a_5
+  - libgcc-ng=14.1.0=h77fa898_0
+  - libgomp=14.1.0=h77fa898_0
   - libnghttp2=1.58.0=h47da74e_1
   - libssh2=1.11.0=h0841786_0
-  - libstdcxx-ng=13.2.0=h7e041cc_5
-  - libzlib=1.2.13=hd590300_5
-  - minimap2=2.26=he4a0461_2
-  - ncurses=6.4=h59595ed_2
-  - openssl=3.2.1=hd590300_0
-  - samtools=1.19.2=h50ea8bc_0
+  - libstdcxx-ng=14.1.0=hc0a3c3a_0
+  - libzlib=1.2.13=h4ab18f5_6
+  - minimap2=2.28=he4a0461_1
+  - ncurses=6.5=h59595ed_0
+  - openssl=3.3.1=h4bc722e_2
+  - python_abi=3.8=4_cp38
+  - samtools=1.20=h50ea8bc_1
+  - sysroot_linux-64=2.17=h4a8ded7_16
+  - tzdata=2024a=h0c530f3_0
   - xz=5.2.6=h166bdaf_0
-  - zlib=1.2.13=hd590300_5
-  - zstd=1.5.5=hfc55251_0
+  - zlib=1.2.13=h4ab18f5_6
+  - zstd=1.5.6=ha6fb4c9_0
