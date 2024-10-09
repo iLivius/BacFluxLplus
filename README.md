@@ -56,7 +56,7 @@ This guide gets you started with `BacFluxL+`. Here's a quick guide:
 - Configure the `config.yaml`:
     - Specify the input directory containing:
         * Illumina reads: paired-end files, *e.g., strain-1_R1.fq.gz, strain-1_R2.fq.gz.* 
-        * ONT reads: long sequencing counterpart, *e.g., strain-1_ont.fg.qz.*
+        * ONT reads: long sequencing counterpart, *e.g., strain-1_ont.fq.qz.*
 
     - Provide the desired location for the analysis outputs and the path to the following databases:
         * blast_db: path to the [NCBI core nt](https://ftp.ncbi.nlm.nih.gov/blast/db/) database directory
